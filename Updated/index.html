@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Android Html, Css & Js Editor Project</title>
+    <!--Importing Css file -->
+    <link rel="stylesheet" href="css/editor.css">    
+    <!--Importing font awesome icons file-->
+     <link rel="stylesheet" href="font/fontawesome-free-6.1.1-web/css/all.css">
+</head>
+<body onscroll="hideitems();" onblur="hideitems();">
+
+<header>
+    <div class="all-header-properties">
+  <p id="header-menu-bar" onclick="showEditoMenu();"><i class="fas fa-ellipsis-vertical"></i></p>
+  </div>
+
+  <!-- Editor files name indicators -->
+    <div class="all-indicators">
+  <p id="codeIndicator" class="showHtmlEditor">index.html</p>
+  <p id="codeIndicator" class="showCssEditor">stylesheet.css</p>
+  <p id="codeIndicator" class="showJsEditor">script.js</p>
+  <p class="codeIndicator-icon"><i class="fas fa-circle-plus"></i></p>
+  </div>
+</header>
+
+<!-- editor wrapper -->
+<div class="editor-container">
+
+  <!-- editor text line counter container -->
+  <p id="counterBack"><div id="codeCounter"></div></p>
+
+  <!--editor menuBar-->
+  <div id="editor-ellipsis-menu">
+<ul>
+<li id="showfilesContainer">New File</li>
+
+<!-- upload new file button -->
+  <label for="fileToLoad">
+  <input onchange="return showWareload()" type="file" accept=".html,.css,.js" id="fileToLoad" class="fileToLoadaccept" style="display:none;">
+<li onclick="hideitems();">Open File...</li>
+</label>
+<hr>
+
+<!-- save any currant file on browser local storage buttons -->
+<li id="savehtml" onclick="saveehtml()">Save</li>
+<li id="savecss"  onclick="saveecss()" style="display:none;">Save</li>
+<li id="savejs"   onclick="saveejs()" style="display:none;">Save</li>
+
+<!-- download any currant file to local device -->
+<li id="saveashtml" onclick="saveHtmlFileAs()">Save As...</li>
+<li id="saveascss" onclick="saveCssFileAs()" style="display:none;">Save As...</li>
+<li id="saveasjs" onclick="saveJsFileAs()" style="display:none;">Save As...</li>
+
+<!-- editor Edit container to allow select(highlight), copy, cut and paste code -->
+<li onclick="showeEditContainer()">Edit</li>
+<div class="edit-list-container">
+
+  <!-- Select -->
+<li id="selectAll-html">Select All</li>
+<li id="selectAll-css" style="display:none">Select All</li>
+<li id="selectAll-js" style="display:none">Select All</li>
+<hr>
+
+<!-- copy -->
+<li id="Copy-html">Copy</li>
+<li id="Copy-css" style="display:none">Copy</li>
+<li id="Copy-js" style="display:none">Copy</li>
+
+<!-- cut -->
+<li id="Cut-html">Cut</li>
+<li id="Cut-css" style="display:none">Cut</li>
+<li id="Cut-js" style="display:none">Cut</li>
+<hr>
+
+<!-- paste -->
+<li id="Paste-html">Paste</li>
+<li id="Paste-css" style="display:none">Paste</li>
+<li id="Paste-js" style="display:none">Paste</li>
+</div>
+<hr>
+<li title="Exit" onclick="hideitems();">Exit</li>
+</ul>
+  </div>
+
+<!--Editor Files Container Buttons List -->
+<div id="filesContainerList">
+<ul>
+  <!-- Html editor file button -->
+<li onclick="showHtmlEditorpage();">HTML File</li>
+<hr>
+<!-- Css editor file button -->
+<li onclick="showCssEditorpage();">CSS File</li>
+<hr>
+<!-- Js editor file button-->
+<li onclick="showJsEditorpage();">Js File</li>
+</ul>
+  </div>
+
+<!-- editor Create or Rename File As "Pop-up alert" -->
+<div class="editorRenameFileSec">
+  <div class="editorRenameFilePopupContainer">
+<p>File Name</p>
+<input type="text" maxlength="14" placeholder="File Name...">
+<select id="files-select">
+
+  <!-- Create or Rename Html file -->
+<option value="htmlfile">HTML File</option>
+
+  <!-- Create or Rename Css file -->
+<option value="cssfile">CSS File</option>
+
+  <!-- Create or Rename Js file -->
+<option value="jsfile">JS File</option>
+</select>
+<br>
+<!-- buttons for Creating or canceling file creating -->
+<div class="popup-container-buttons">
+
+  <!-- canceling file creating  -->
+<button id="cancelSaveBtn";>Cancel</button>
+
+<!-- Create or Rename Html file if it's on currant view location-->
+<button id="showCreateHtmlbtn" onclick="Createhtmlbtn()">Create</button>
+
+<!-- Create or Rename Css file if it's on currant view location -->
+<button id="showCreateCssbtn" onclick="CreateCssbtn()" style="display:none;">Create</button>
+
+<!-- Create or Rename Js file if it's on currant view location -->
+<button id="showCreateJsbtn" onclick="CreateJsbtn()" style="display:none;">Create</button>
+</div>
+</div>
+</div>
+
+<!--Editor load file As "Pop-up alert"-->
+<div class="whare-load-popup" style="display:none;">
+  <div class="whare-load-popup-container">
+
+<p style="margin-bottom:5px;">Open As</p><select id="load-files-select">
+
+  <!-- load file As html file -->
+<option value="loadhtmlfile">HTML File</option>
+
+<!-- load file As Css file -->
+<option value="loadcssfile">CSS File</option>
+
+<!-- load file As Js file -->
+<option value="loadjsfile">JS File</option>
+</select>
+<br>
+
+<!-- buttons for loading or canceling file loading -->
+<div class="popup-container-buttons">
+
+  <!-- canceling file loading -->
+<button onclick="hidewhareloadpopup();">Cancel</button>
+
+<!-- loading file on currant file  -->
+<button onclick="loadFileAsText()">Open</button>
+</div></div></div>
+
+<!-- Html Editor File -->
+  <textarea id="html" onclick="hideitems();" spellcheck="false"></textarea>
+<!-- Css Editor File -->
+  <textarea id="css" onclick="hideitems();" spellcheck="false">Css</textarea>
+<!-- Js Editor File -->
+    <textarea id="js" onclick="hideitems();" spellcheck="false">Js</textarea>
+</div>
+
+<!-- editors Output container -->
+<div id="all-editor-output">
+  
+<!-- element to display title of the currant page -->
+<p class="documentTitle"></p>
+<p class="titlePreview">Preview</p>
+
+  <!-- element to display editor output -->
+<iframe id="editor-outpu-frame"></iframe>
+
+<!-- editor output menuBar icon(vertical ellipsis) -->
+  <p title="Show Menu" id="editor-output-ellipsis" onclick="showOutputMenu();"><i class="fas fa-ellipsis-vertical"></i></p>
+
+  <!-- hide editor output icon(back arrow) -->
+  <p title="Back" id="outputBackArrow" onclick="hideOutputFrame();"><i class="fas fa-arrow-left"></i></p>
+
+  <!-- editor output MenuBar container -->
+  <div id="editor-output-menu">
+<ul>
+
+  <!-- Refresh the page if click on external link(like if empty page appear) -->
+<li title="Refresh" onclick="pageRefresh()">Refresh</li>
+<hr>
+
+<!-- display Desktop Mode -->
+<li><label title="Desktop Mode" style="user-select:none;cursor:pointer;" for="desktopMode">Desktop Mode</label> <input id="desktopMode" type="checkbox"></li>
+<hr>
+
+<!-- close or hide editor output container -->
+<li title="Exit" onclick="hideOutputFrame();">Exit</li>
+</ul>
+  </div>
+</div>
+
+<!-- editor run or compile Code button -->
+<div class="footer-run">
+  <a title="Run" id="editor-run-btn" >Run</a>
+</div>
+
+<!--Importing js file -->
+<script type="text/javascript" src="script/index.js"></script>      
+</body>
+</html>

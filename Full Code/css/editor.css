@@ -1,0 +1,437 @@
+/* global styling */
+*{
+	padding: 0;
+	margin: 0;
+}
+
+/*change the default selection color*/
+::selection{
+background-color: transparent;
+color: darkblue;
+text-shadow: .5px .5px blue;
+}
+
+/*styling the scrollbar */
+ ::-webkit-scrollbar{
+ background-color:black;
+width:5px;
+visibility: hidden;
+}
+ ::-webkit-scrollbar-thumb{
+  border-radius: 2rem;
+box-shadow: inset 0 0 5px #e4e4e4;
+}
+
+/* styling entire body */
+body{
+	background-color: white;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	font-family:"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+overflow-y: scroll;
+/* style background with drawing */
+background-image: linear-gradient(rgba(185, 181, 181, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(158, 154, 154, 0.3) 1px, transparent 1px);
+background-size: 2.3em 2em;
+}
+
+header{
+	background-color: black;
+	width: 100%;
+	height: 7rem;
+	color: white;
+	display:grid;
+	align-items: center;
+	position: fixed;
+	z-index:2;
+	border-top:1px solid rgb(42, 42, 42);
+}
+/*styling header properties*/
+header .all-header-properties{
+	justify-content:center;
+	align-items:center;
+	position:absolute;
+	display:flex;
+	top:30px;
+    width:100%;
+}
+header #header-menu-bar{
+	font-size: 13px;
+	position:absolute;
+	cursor: pointer;
+	padding: 9px;
+	width: 13px;
+	height: 13px;
+	left:20px;
+	border-radius: 50%;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content:center;
+	background-color: blue;
+		box-shadow: inset 0 0 10px 6px rgb(1 51 120 / 90%);
+}
+
+ /*styling editor menuBar*/
+#editor-ellipsis-menu{
+	position: fixed;
+text-align: left;
+left: 0;
+top: 0;
+width: 8rem;
+line-height: 30px;
+padding:10px;
+border: 1px solid silver;
+background-color: #efefef;
+text-shadow: 0  0 1px #0e1d34;
+display: none;
+z-index:3;
+}
+#editor-ellipsis-menu li{
+	list-style: none;
+font-size: 15px;
+color:#0e1d34;
+cursor: pointer;
+margin: 1px 0;
+}
+
+/*styling editor Edit container */
+#editor-ellipsis-menu .edit-list-container{
+margin-left: 9.4rem;
+	position: absolute;
+text-align: left;
+left: 0;
+top: 7rem;
+width: 8rem;
+line-height: 30px;
+padding:10px;
+border: 1px solid silver;
+background-color: #efefef;
+text-shadow: 0  0 1px #0e1d34;
+display: none;
+}
+
+/*styling Editor files name indicators */
+header .all-indicators{
+margin-top:77px;
+display: flex;
+justify-content:center;
+align-items:center;
+position:absolute;
+}
+header #codeIndicator{
+	user-select:none;
+	border-radius:5px 21px 0 0;
+	padding:9px 12px;
+	letter-spacing:.1px;
+	outline: none;
+	font-size: 13px;
+	color: black;
+	white-space: nowrap;
+	background-color: white;
+margin-left: 35px;
+border-bottom: 1px solid silver;
+  text-shadow:0 0 1.5px rgb(1 51 120 / 100%);
+}
+#codeIndicator:after{
+content:'';
+margin-left:12px;
+margin-top:4px;
+transform:rotate(20deg);
+border-top:5px solid transparent;
+box-shadow:0 12px 0 white;
+border-bottom:17px solid transparent;
+border-left:15px solid transparent;
+border-radius:20px;
+width:17px;
+position: absolute;
+z-index:-1;
+}
+header .codeIndicator-icon{
+	border-radius: 50%;
+margin-left:6px;
+cursor: pointer;
+font-size: 14px;
+width: 21px;
+height:22px;
+display:flex;
+justify-content:center;
+align-items:center;
+	background-color: blue;
+		box-shadow: inset 0 0 15px 8px rgb(1 51 120 / 90%);
+border: 1.5px dashed white;
+}
+
+/* hide Css and Js editors file buttons */
+header .showCssEditor,.showJsEditor{
+	display: none;
+}
+
+/*styling editor wrapper*/
+.editor-container{
+margin-top:7.1rem;
+width:calc(100% - 5px);
+display:block;
+background-color: transparent;
+}
+
+/* styling editor text line counter container */
+#codeCounter{
+width:35px;
+height:100vh;
+position: absolute;
+min-height:auto;
+color: rgb(224, 223, 223);
+text-align:left;
+z-index:1;
+line-height:35px;
+padding-top:7px;
+font-size:12px;
+user-select: none;
+height: calc(100vh - 7.1rem);
+}
+#counterBack{
+	position:fixed;
+	width:35px;
+	color:white;
+	height: calc(100vh - 7.1rem);
+	left:0;
+background-color:black;
+}
+
+/* Styling Editor Files Container Buttons List */
+#filesContainerList{
+position:fixed;
+text-align: left;
+margin-left:32px;
+line-height: 40px;
+width:7.5rem;
+padding:9px;
+border: 1px solid silver;
+background-color: #efefef;
+text-shadow: 0  0 1px #0e1d34;
+z-index:5;
+display: none;
+}
+#filesContainerList li{
+cursor: pointer;
+list-style-type: none;
+}
+
+/*Styling editor Create or Rename File As "Pop-up alert"*/
+.editorRenameFileSec{
+position:fixed;
+display: flex;
+justify-content:center;
+align-items:center;
+width: 100%;
+margin-top: 11%;
+z-index: 9999;
+display: none;
+}
+.editorRenameFilePopupContainer{
+		display: grid;
+justify-content:center;
+align-items:center;
+background-color: #e6e6e6;
+border-radius: 10px;
+height: auto;
+padding: 17px 25px;
+border: 1px solid  #939393;
+}
+.editorRenameFilePopupContainer p{
+color: black;
+text-align: left;
+	margin-bottom: 10px;
+	text-shadow: 0 0 1px black;
+}
+.editorRenameFilePopupContainer :where(input, button,select){
+  outline: none;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+    height: 35px;
+  padding: 0 10px;
+  border-radius:5px;
+  border: 1px solid #bfbfbf;
+}
+.fileNameInput::placeholder{
+	font-size:15px;
+	padding-left:-3px;
+}
+.editorRenameFilePopupContainer button{
+	margin: 0 15px;
+	background-color: black;
+	opacity: .6;
+width:79px;
+	outline: 1px solid black;
+	font-weight: 500;
+	font-size: 17px;
+	cursor: pointer;
+	color: white;
+}
+.editorRenameFilePopupContainer #files-select{
+border-top: none;
+border-right: none;
+border-left: none;
+background-color: inherit;
+border-radius: 0;
+font-size: 15px;
+padding:0;
+}
+
+/*Styling All Editors files*/
+.editor-container textarea{
+	outline: none;
+	width:calc(100% - 50px);
+	height:auto;
+	left: 5px;
+  resize:none;
+  padding: 8px 10px 8px 15px;
+  font-size:16px;
+  border: none;
+  line-height:35px;
+  letter-spacing:.2px;
+  font-family: arial;
+  color:rgb(0, 0, 0);
+  margin-left: 25px;
+  background-color: transparent;
+white-space: nowrap;
+overflow-y: hidden;
+}
+/* hide Css and Js editors file*/
+.editor-container #js,#css{
+	display: none;
+}
+
+/*editor Output container*/
+#all-editor-output{
+width: 100%;
+height: 100vh;
+    position: fixed;
+    background:black;
+    z-index: 999;
+    display: none;
+    text-align: left;
+	border-top:1px solid rgb(42, 42, 42);
+}
+
+/* Styling element to display editor output */
+#editor-outpu-frame{
+width: 100%;
+height:calc(100vh - 3.5rem);
+border: none;
+outline: none;
+position: fixed;
+background: white;
+bottom:0;
+}
+
+/*styling editor output menuBar icon(vertical ellipsis) and hide editor output icon(back arrow)*/
+#editor-output-ellipsis,
+#outputBackArrow,
+.documentTitle,
+.titlePreview{
+right:5px;
+top:14px;
+position: fixed;
+cursor: pointer;
+width: 10px;
+height: 10px;
+padding: 10px;
+font-size: 15px;
+border-radius: 50%;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+color:white;
+}
+.documentTitle{
+position:fixed;
+left:2.5rem;
+margin-top:-4px;
+font-size:large;
+width:70%;
+height: inherit;
+border-radius:0;
+white-space:nowrap;
+display:block;
+overflow:hidden;
+text-overflow:ellipsis;
+padding:0;
+padding-left:6px;
+text-align:left;
+}
+.titlePreview{
+	color:white;
+	position:absolute;
+	top:23px;
+	font-size:14px;
+	left:3.6rem;
+	letter-spacing:.5px;
+}
+#editor-output-ellipsis:active,
+#outputBackArrow:active{
+transform:scale(.9);
+background-color:white;
+color:black;
+}
+#outputBackArrow{
+left:5px;
+}
+
+/*Styling editor output MenuBar container*/
+#editor-output-menu{
+position: absolute;
+text-align: left;
+right: 0;
+top: 0;
+line-height: 45px;
+width: 8rem;
+padding:10px;
+border: 1px solid silver;
+background-color: #efefef;
+text-shadow: 0  0 1px #0e1d34;
+display: none;
+}
+#editor-output-menu li{
+	list-style: none;
+font-size: 15px;
+color:#0e1d34;
+cursor: pointer;
+}
+#desktopMode{
+margin-left:6px;
+}
+
+/*Styling editor run or compile Code button*/
+.footer-run{
+background-color: #0e1d34;
+	bottom:20px;
+	right: 20px;
+	border-radius:25px;
+position: fixed; 
+z-index:99;
+}
+.footer-run a{
+	display: block;
+	text-decoration: none;
+	padding: 11px 29px;
+color: white;
+border-radius: 25px;
+transform: translateY(-10px);
+	background-color: blue;
+		box-shadow: inset 0 0 15px 8px rgb(1 51 120 / 90%);
+	border: 3px solid white;
+font-size: 16px;
+cursor: pointer;
+}
+
+
+/*display only on small screen devices if needed*/
+/* @media screen and (min-width:800px) {
+  body{
+    display:none;
+  }
+} */
